@@ -1,13 +1,7 @@
 package com.spl.spl.controller;
 
-import com.spl.spl.dto.group.Groups;
-import com.spl.spl.service.group.GroupServiceImpl;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
