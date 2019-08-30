@@ -13,4 +13,7 @@ public interface BaseballRepository extends JpaRepository<Baseball, Integer> {
 //            ":hit,:homerun,:rbi,:score,:ball,:strike)",nativeQuery = true)
 //    public Baseball insert(@Param("atbat") int atbat,@Param("hit") int hit,@Param("homerun") int homerun,@Param("rbi") int rbi
 //    ,@Param("score") int score,@Param("ball") int ball,@Param("strike") int strike);
+
+    @Query(value = "select * from baseball where baseball_idx = :baseballIdx",nativeQuery = true)
+    public Baseball findByIdx(@Param("baseballIdx")Integer idx);
 }

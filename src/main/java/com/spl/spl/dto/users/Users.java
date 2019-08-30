@@ -2,6 +2,7 @@ package com.spl.spl.dto.users;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Users {
 
     @Id
@@ -54,8 +56,6 @@ public class Users {
 
     @Column(name = "find_key")
     private String findKey;
-
-    Users(){}
 
     @Builder
     public Users(Integer usersIdx,String email,String pwd,String socialType,Date birthDate,String gender,String religion,String profile,String name,String nick,String findKey){

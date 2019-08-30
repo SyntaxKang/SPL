@@ -20,8 +20,8 @@ public class BaseballServiceImpl implements BaseballService {
     }
 
     @Override
-    public Optional<Baseball> findByIdx(Integer idx) {
-        return repository.findById(idx);
+    public Baseball findByIdx(Integer idx) {
+        return repository.findByIdx(idx);
     }
 
     @Override

@@ -10,4 +10,6 @@ public interface GroupBaseballService {
     public List findAll();
 
     public void insert(Groups groups, Users users, Baseball baseball);
+
+    public List findByGroupIdx(Integer idx);
 }

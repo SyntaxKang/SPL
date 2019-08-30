@@ -2,6 +2,7 @@ package com.spl.spl.controller.baseball;
 
 import com.spl.spl.dto.baseball.Baseball;
 import com.spl.spl.dto.group.Groups;
+import com.spl.spl.dto.group_baseball.Group_baseball;
 import com.spl.spl.dto.users.Users;
 import com.spl.spl.repository.baseball.BaseballRepository;
 import com.spl.spl.service.baseball.BaseballServiceImpl;
@@ -35,45 +36,68 @@ public class BaseballController {
 
     @GetMapping("/baseball")
     public String baseballHome(Model model, @RequestParam(name = "groupIdx") String idx) {
-        List<Baseball> list;
+        List<Baseball> list = new ArrayList<Baseball>();
         List<Users> uList = new ArrayList<Users>();
+        List<String> buList = new ArrayList<String>();
+        List gameCount = new ArrayList();
 
+        int useridx = 0;
+        int count = 0;
 
-//        List<Users_group> ugList;
+        Users user = new Users();
+        Baseball baseball = new Baseball();
 
-        list = baseballService.findAll();
-//        ugList = usersGroupService.findAll();
-//
-//
-//        for (Users_group u_g : ugList) {
-//            System.out.println("유저_그룹 번호: "+u_g.getUsersGroupIdx());
-//            System.out.println("유저번호: "+u_g.getUsers().getUsersIdx());
-//            System.out.println("그룹번호: "+u_g.getGroups().getGroupIdx());
-//        }
+        List<Object[]> gbList = groupBaseballService.findByGroupIdx(Integer.parseInt(idx));
+
+        for (int j = 0; j < gbList.size(); j++) {
+            Object[] obj = gbList.get(j);
+
+            if(useridx != (int)obj[3]) {
+                if(useridx != 0){
+                    list.add(baseball);
+                    gameCount.add(count);
+                    count = 0;
+                }
+                useridx = (int) obj[3];
+                user = usersService.findByIdx((Integer)obj[3]);
+                baseball = new Baseball();
+                buList.add(user.getName());
+            }
+
+            Baseball getBaseball = baseballService.findByIdx((Integer)obj[2]);
+
+            baseball.setAtbat(baseball.getAtbat() + getBaseball.getAtbat());
+            baseball.setBall(baseball.getBall() + getBaseball.getBall());
+            baseball.setHit(baseball.getHit() + getBaseball.getHit());
+            baseball.setHomerun(baseball.getHomerun() + getBaseball.getHomerun());
+            baseball.setRbi(baseball.getRbi() + getBaseball.getRbi());
+            baseball.setScore(baseball.getScore() + getBaseball.getScore());
+            baseball.setStrike(baseball.getStrike() + getBaseball.getStrike());
+            count++;
+
+            if(j == gbList.size() - 1){
+                list.add(baseball);
+                gameCount.add(count);
+            }
+        }
+
 
         List<Object[]> list2 = usersGroupService.findByGroup(Integer.parseInt(idx));
-
-        if (list2 == null) {
-            System.out.println("응 안되");
-        } else {
-            System.out.println("시발 된다 오오오");
-        }
 
         for (int j = 0; j < list2.size(); j++) {
             Object[] obj = list2.get(j);
 
-            Users user = usersService.findByIdx((Integer) obj[1]);
+            Users getUser = usersService.findByIdx((Integer) obj[1]);
 
-            System.out.println("이름: " + user.getName());
-
-            uList.add(user);
+            uList.add(getUser);
         }
 
 
         model.addAttribute("baseballList", list);
         model.addAttribute("userList", uList);
+        model.addAttribute("userBaseballList",buList);
         model.addAttribute("groupIdx",idx);
-        model.addAttribute("gameCount",list.size());
+        model.addAttribute("gameCount",gameCount);
 
         return "baseball/baseballRecode";
     }

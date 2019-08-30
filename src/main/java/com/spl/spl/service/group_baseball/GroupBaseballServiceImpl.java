@@ -31,4 +31,9 @@ public class GroupBaseballServiceImpl implements GroupBaseballService{
                 .baseball(baseball)
                 .build());
     }
+
+    @Override
+    public List findByGroupIdx(Integer idx) {
+        return repository.findByGroupIdx(idx);
+    }
 }

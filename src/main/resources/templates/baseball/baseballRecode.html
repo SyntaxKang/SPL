@@ -57,7 +57,7 @@
         var type = 'POST';
 
         $(document).ready(function () {
-            swal("load Success","Hello User","success");
+            //swal("load Success","Hello User","success");
 
             $("#submitBtn").click(function () {
                 var data = {
@@ -252,9 +252,9 @@
                                 </tr>
                                 </tbody>
                                 <tbody th:unless="${baseballList == null}">
-                                <tr th:each="list : ${baseballList}">
-                                    <td>테스트 중</td>
-                                    <td th:text="${gameCount}"></td>
+                                <tr th:each="list,index : ${baseballList}">
+                                    <td th:text="${userBaseballList.get(index.index)}"></td>
+                                    <td th:text="${gameCount.get(index.index)}"></td>
                                     <td th:text="${list.getAtbat()}"></td>
                                     <td th:text="${list.getHit()}"></td>
                                     <td th:text="${list.getHomerun()}"></td>
