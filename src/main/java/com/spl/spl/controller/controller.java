@@ -1,11 +1,14 @@
 package com.spl.spl.controller;
 
+import com.spl.spl.repository.baseball.BaseballRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+@AllArgsConstructor
 @Controller
 public class controller {
 
+   private BaseballRepository repository;
     //메인화면
     @GetMapping("/index")
     public String index(){ return "index";}
@@ -24,12 +27,9 @@ public class controller {
     }
 
 
-    @GetMapping("/Bowling/Recode")
-    public String Recode(){
-        return "/Bowling/RecodeRoom";
-    }
-    @GetMapping("/Bowling/MVP")
-    public String Mvp(){
-        return "Mvp";
-    }
+
+
+
+
+
 }
