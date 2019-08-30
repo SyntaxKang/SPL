@@ -43,19 +43,9 @@
     <h2>가입한 모임</h2>
 
     <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="list : ${groupsList}">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a th:href="@{/baseball(groupIdx = ${list.getGroupIdx()})}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             </div>
         </div>
     </div>

@@ -3,23 +3,20 @@ package com.spl.spl.dto.baseball;
 
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-public class baseball {
-
-    public baseball(){};
+@Data
+@NoArgsConstructor
+public class Baseball {
 
     @Id
     @Column(name = "baseball_idx")
-    @GeneratedValue
-    private int baseball_idx;
-
-    @Column(name = "game")
-    private int game;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer baseballIdx;
 
     @Column(name = "atbat")
     private int atbat;
@@ -43,10 +40,9 @@ public class baseball {
     private int strike;
 
     @Builder
-    public baseball(int game, int atbat, int hit, int ball, int homerun, int rbi, int score, int strike){
+    public Baseball(int atbat, int hit, int ball, int homerun, int rbi, int score, int strike){
         this.atbat = atbat;
         this.ball = ball;
-        this.game = game;
         this.hit = hit;
         this.homerun = homerun;
         this.rbi = rbi;
