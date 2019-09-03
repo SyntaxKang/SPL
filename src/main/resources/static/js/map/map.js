@@ -109,8 +109,11 @@ function mapClick(e){
                     $intRate = $xml.find("Document");
                 var tDistance = "총 거리 : "+($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue/1000).toFixed(1)+"km,";
                 var tTime = " 총 시간 : "+($intRate[0].getElementsByTagName("tmap:totalTime")[0].childNodes[0].nodeValue/60).toFixed(0)+"분";
+
+
                 $("#result").text(tDistance+tTime);
-                $("#range").text(($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue/1000).toFixed(1));
+                $("#distance").val(($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue/1000).toFixed(1));
+
 
 
 
@@ -149,7 +152,7 @@ function mapClick(e){
             }
         });
     });
-    console.log("리셋전"+routeLayer);
+
 
     map.events.unregister("click", map, mapClick);// onclick 이벤트해제(클릭이벤트 중복 방지)
 
@@ -163,32 +166,4 @@ function resetClick() {
 
 }
 
-function saveClick() {
-    var url = '/walk/insert';
-    var type = 'POST';
-    var data = {
-        "range": $("#range").val(),
-        "goal" : $("#goal").val(),
-        "date" : $("#date").val(),
-        "userIdx":$("#userIdx").val(),
-        "groupIdx":$("#groupIdx").val()
-    };
-    $.ajax({
-        url: url,
-        type: type,
-        data: data,
-        success: function (data) {
-            swal("저장했습니다!", "버튼을 클릭해주세요!", "success");
-        },
-        complete: function (data) {
-            location.reload();
-        }
-    });
-
-}
-
-
-
-window.onload= function () {
     initTmap();
-}

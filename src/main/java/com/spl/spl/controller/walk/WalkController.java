@@ -8,7 +8,7 @@ import com.spl.spl.service.group.GroupServiceImpl;
 import com.spl.spl.service.group_walk.GroupWalkService;
 import com.spl.spl.service.user_group.UsersGroupServiceImpl;
 import com.spl.spl.service.users.UsersServiceImpl;
-import com.spl.spl.service.walk.WalkService;
+import com.spl.spl.service.walk.WalkServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class WalkController {
     private UsersServiceImpl usersService;
     private UsersGroupServiceImpl usersGroupService;
     private GroupServiceImpl groupService;
-    private WalkService walkService;
-    private WalkRepository repository;
+    private WalkServiceImpl walkService;
+    private WalkRepository walkRepository;
     private GroupWalkService groupWalkService;
 
     @GetMapping("/walk")
@@ -92,14 +93,22 @@ public class WalkController {
     @RequestMapping(value = "/walk/insert", method = RequestMethod.POST)
     public String walkInsert(Walk walk, @RequestParam("userIdx") int userIdx, @RequestParam("groupIdx") String groupIdx) {
 
+
+
         Users users = usersService.findByIdx(userIdx);
         Groups groups = groupService.findByIdx(Integer.parseInt(groupIdx));
 
-        Walk w = repository.save(Walk.builder()
-                .range(walk.getRange())
-                .date(walk.getDate())
-                .goal(walk.getGoal())
-                .build());
+
+
+        Walk w = walkRepository.save(
+                Walk.builder()
+                        .distance(walk.getDistance())
+                        .goal(walk.getGoal())
+                        .date(LocalDate.now())
+                        .build()
+        );
+
+
 
         groupWalkService.insert(groups, users, w);
 

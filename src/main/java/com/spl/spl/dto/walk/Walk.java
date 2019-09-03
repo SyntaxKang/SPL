@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,17 +17,19 @@ public class Walk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer walkidx;
 
-    @Column(name="range")
-    private double range;
+    @Column(name="distance")
+    private double distance;
+
     @Column(name="goal")
     private double goal;
+
     @Column(name="date")
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Builder
-    public Walk(double range, double goal, LocalDateTime date)
+    public Walk(double distance, double goal, LocalDate date)
     {
-        this.range=range;
+        this.distance=distance;
         this.goal=goal;
         this.date=date;
 

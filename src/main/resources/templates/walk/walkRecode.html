@@ -22,7 +22,7 @@
     <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=2bd4f6d9-de5d-429a-8062-c8a415063781"></script>
     <!--map -->
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -94,23 +94,49 @@
                         <table class="table table-bordered" width="100%" cellspacing="0">
                             <input type="hidden" name="groupIdx" id="groupIdx" th:value="${groupIdx}">
                             <input type="hidden" name="userIdx" id="userIdx" th:value="1">
+                            <input type="hidden" name="distance" id="distance" value="distance">
 
-                           <tr>
-                               <td> 목표 입력 <input type="text" id="goal"> km</td>
-                           </tr>
+
+
+                                <td>달린 거리
+                                    <th:text id="result" th:value="result"></th:text>
+                                </td>
+
                             <tr>
-                                <td>달린 거리  <p id="range" ></p></td>
-
+                                <td> 목표 입력 <input type="text" id="goal" name="goal"> km</td>
                             </tr>
+
                         </table>
 
                         <button id="clear" class="btn btn-primary" onclick="resetClick()">지우기</button>
 
                         <button id="save" class="btn btn-primary" onclick="saveClick()">저장하기</button>
-                    </div>
+                        <script>
 
+                            function saveClick() {
+                                var url = '/walk/insert';
+                                var type = 'POST';
+                                var data = {
+                                    "distance": $("#distance").val(),
+                                    "goal": $("#goal").val(),
+                                    "userIdx": $("#userIdx").val(),
+                                    "groupIdx": $("#groupIdx").val()
+                                };
+                                $.ajax({
+                                    url: url,
+                                    type: type,
+                                    data: data,
+                                    success: function (data) {
+                                        swal("저장했습니다!", "버튼을 클릭해주세요!", "success");
+                                    },
+                                    complete: function (data) {
+                                        location.reload();
+                                    }
+                                });
 
-                    <div class="table-responsive">
+                            }
+                        </script>
+
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
@@ -129,25 +155,23 @@
                             </tbody>
                             <tbody th:unless="${walkList == null}">
                             <tr th:each="list,index : ${walkList}">
-                                <td th:text="${list.getRange()}"></td>
+                                <td th:text="${list.getWalkidx()}"></td>
+                                <td th:text="${list.getDistance()}"></td>
                                 <td th:text="${list.getGoal()}"></td>
-                                <td th:text="${list.getRange()}/${list.getGoal()}"></td>
+                                <td th:text="${list.getDistance()/list.getGoal()}"+%></td>
                                 <td th:text="${list.getDate()}"></td>
                             </tr>
                             </tbody>
 
                         </table>
+                    </div>
+
+
                 </div>
-
-
-
-
-
-            </div>
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>
@@ -169,6 +193,6 @@
 <!--map & search load  by Tmap api-->
 <script th:src="@{js/map/map.js}"></script>
 
-<script th:src="@{js/map/date.js}"></script>
+
 
 </body>

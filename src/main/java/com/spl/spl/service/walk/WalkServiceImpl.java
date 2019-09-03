@@ -5,7 +5,7 @@ import com.spl.spl.repository.walk.WalkRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +25,9 @@ public class WalkServiceImpl implements WalkService {
     }
 
     @Override
-    public void insert(double range, double goal, LocalDateTime date) {
+    public void insert(double distance, double goal, LocalDate date) {
         workrepository.save(Walk.builder()
-                .range(range)
+                .distance(distance)
                 .goal(goal)
                 .date(date)
                 .build());
