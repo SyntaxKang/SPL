@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>걷기모임</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
+    <link th:href="@{css/timeline.css}" rel="stylesheet">
+    <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=2bd4f6d9-de5d-429a-8062-c8a415063781"></script>
+    <!--map -->
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body id="page-top">
+<div id="Tobar">
+    <!-- toolbar -->
+    <div th:include="/toolbar.html"></div>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">걷기모임 <sup>New</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/RecodeRoom">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>전체 보기</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+
+            <!-- MVP -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/MVP">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>꾸며보세요</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <!-- 개인기록 -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/Recode">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>꾸며보세요</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
+        </ul>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+                <div id="map_div" ></div>
+
+
+
+
+
+
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <input type="hidden" name="groupIdx" id="groupIdx" th:value="${groupIdx}">
+                            <input type="hidden" name="userIdx" id="userIdx" th:value="1">
+                            <input type="hidden" name="distance" id="distance" value="distance">
+
+
+
+                                <td>달린 거리
+                                    <th:text id="result" th:value="result"></th:text>
+                                </td>
+
+                            <tr>
+                                <td> 목표 입력 <input type="text" id="goal" name="goal"> km</td>
+                            </tr>
+
+                        </table>
+
+                        <button id="clear" class="btn btn-primary" onclick="resetClick()">지우기</button>
+
+                        <button id="save" class="btn btn-primary" onclick="saveClick()">저장하기</button>
+                        <script>
+
+                            function saveClick() {
+                                var url = '/walk/insert';
+                                var type = 'POST';
+                                var data = {
+                                    "distance": $("#distance").val(),
+                                    "goal": $("#goal").val(),
+                                    "userIdx": $("#userIdx").val(),
+                                    "groupIdx": $("#groupIdx").val()
+                                };
+                                $.ajax({
+                                    url: url,
+                                    type: type,
+                                    data: data,
+                                    success: function (data) {
+                                        swal("저장했습니다!", "버튼을 클릭해주세요!", "success");
+                                    },
+                                    complete: function (data) {
+                                        location.reload();
+                                    }
+                                });
+
+                            }
+                        </script>
+
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>거리</th>
+                                <th>목표</th>
+                                <th>달성률</th>
+                                <th>날짜</th>
+                            </tr>
+                            </thead>
+
+                            <tbody th:if="${walkList == null}">
+                            <tr>
+                                <td th:width="100%">기록이 존재하지 않습니다.</td>
+                            </tr>
+                            </tbody>
+                            <tbody th:unless="${walkList == null}">
+                            <tr th:each="list,index : ${walkList}">
+                                <td th:text="${list.getWalkidx()}"></td>
+                                <td th:text="${list.getDistance()}"></td>
+                                <td th:text="${list.getGoal()}"></td>
+                                <td th:text="${list.getDistance()/list.getGoal()}"+%></td>
+                                <td th:text="${list.getDate()}"></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{js/demo/chart-area-demo.js}"></script>
+<script th:src="@{js/demo/chart-pie-demo.js}"></script>
+
+<!--map & search load  by Tmap api-->
+<script th:src="@{js/map/map.js}"></script>
+
+
+
+</body>
