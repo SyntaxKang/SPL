@@ -3,12 +3,14 @@ package com.spl.spl.dto.user_group;
 import com.spl.spl.dto.group.Groups;
 import com.spl.spl.dto.users.Users;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
+@Data
+@NoArgsConstructor
 @Table(name = "users_group")
 public class Users_group {
 
@@ -33,8 +35,6 @@ public class Users_group {
 
     @Column
     private String nick;
-
-    Users_group(){}
 
     @Builder
     public Users_group(Users users,Groups groups,int grade,String nick){
