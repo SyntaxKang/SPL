@@ -1,4 +1,4 @@
-package com.spl.spl.controller.BowlingController;
+package com.spl.spl.controller.bowling;
 
 
 import com.spl.spl.dto.bowling.Bowling;
