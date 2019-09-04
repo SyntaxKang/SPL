@@ -1,14 +1,14 @@
 package com.spl.spl.dto.group;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter
+@Data
 @NoArgsConstructor
 public class Groups {
 

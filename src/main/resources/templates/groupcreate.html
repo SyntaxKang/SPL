@@ -47,37 +47,6 @@
     <!-- SweetAlert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<script>
-    var action = '';
-    var url = '/groups/insert';
-    var type = 'POST';
-
-
-    $(document).ready(function () {
-        $("#createBtn").click(function () {
-
-            $.ajax({
-                url: url,
-                type: type,
-                data: new FormData($("#createform")[0]),
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (formData) {
-                    alert("생성 성공!", "버튼을 클릭해주세요!", "success");
-                },
-                complete: function (formData) {
-                    location.reload();
-                },
-                error: function(error){
-                    console.log(error);
-                }
-            });
-        });
-    });
-
-</script>
 
 
 <body class="bg-gradient-primary">
@@ -100,15 +69,14 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">모임 생성하기</h1>
                                 </div>
-                                <form class="table" id="createform">
+                                <form class="table" id="createform" action="/group/create" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-sm" id="name"
                                                name="name" placeholder="모임 이름">
                                     </div>
                                     <div class="form-group">
-                                        <label for="profile">upload</label>
-                                        <input type="file" class="form-control form-control-file" id="profile"
-                                               name="profile" placeholder="모임 사진" accept="*">
+                                        <input type="file" class="form-control form-control-file" id="groupprofile"
+                                               name="groupprofile" placeholder="모임 사진" accept="*">
                                     </div>
                                     <div class="form-group">
                                         <textarea class="form-control form-control-sm" id="groupcontent"
@@ -168,16 +136,18 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row" style="margin-left: auto; margin-right: auto">
+                                        <button type="button" class="btn btn-primary" onclick="location.href='/index2'">
+                                            취소하기
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" style="margin-left: 20px"
+                                                id="createBtn" name="createBtn">생성하기
+                                        </button>
+                                    </div>
                                 </form>
                                 <hr>
-                                <div class="row" style="margin-left: auto; margin-right: auto">
-                                    <button type="button" class="btn btn-primary" onclick="location.href='/index2'">
-                                        취소하기
-                                    </button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 20px"
-                                            id="createBtn" name="createBtn">생성하기
-                                    </button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
