@@ -102,7 +102,24 @@
                 <!--메뉴-->
                 <nav class="btn btn-primary" style="margin-left: 470px;">
                     <a href="#" class="text-white" style="margin-left: 20px">타임라인</a>
-                    <a href="/RecodeRoom" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span th:if="${groups.getCategory().toString().equals('야구')}">
+                    <a th:href="@{/baseball(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span th:if="${groups.getCategory().toString().equals('축구')}">
+                    <a th:href="@{/soccer(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span th:if="${groups.getCategory().toString().equals('농구')}">
+                    <a th:href="@{/basketball(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span th:if="${groups.getCategory().toString().equals('당구')}">
+                    <a th:href="@{/billiard(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span th:if="${groups.getCategory().toString().equals('볼링')}">
+                    <a th:href="@{/bowling(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span th:if="${groups.getCategory().toString().equals('걷기')}">
+                    <a th:href="@{/walk(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
                     <a href="#" class="text-white" style="margin-left: 40px">공지사항</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/Photo" class="text-white" style="margin-left: 40px">사진첩</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="#" class="text-white" style="margin-left: 40px;margin-right: 20px">일정</a>

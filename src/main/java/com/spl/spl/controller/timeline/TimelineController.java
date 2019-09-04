@@ -41,6 +41,7 @@ public class TimelineController {
 //        List<Photo> photoList = photoService.findAll();
         List<Photo> photoList = new ArrayList<>();
         List<Article> articleList = articleService.findByIdx(Integer.parseInt(groupIdx));
+        Groups groups = groupService.findByIdx(Integer.parseInt(groupIdx));
 
         for (Article article: articleList) {
             Photo photo = photoService.findByIdx(article.getArticleIdx());
@@ -57,6 +58,7 @@ public class TimelineController {
         model.addAttribute("imgList",fileList);
         model.addAttribute("photoList",photoList);
         model.addAttribute("articleList",articleList);
+        model.addAttribute("groups",groups);
 
         return "timeline";
     }
