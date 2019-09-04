@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article,Integer> {
 
-    @Query(value = "select * from article where groups_idx = :groupIdx",nativeQuery = true)
+    @Query(value = "select * from article where groups_idx = :groupIdx order by write_date desc",nativeQuery = true)
     public List<Article> findByIdx(@Param("groupIdx")Integer idx);
 }

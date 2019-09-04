@@ -147,6 +147,7 @@
                     <div class="col-md-6 gedf-main">
                         <!--타임 라인 글쓰기-->
                         <form action="/timeline/insert" enctype="multipart/form-data" id="articleForm" name="articleForm" method="POST">
+                            <input type="hidden" name="groupIdx" th:value="${groups.getGroupIdx()}">
                             <div class="card gedf-card">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist"
@@ -222,7 +223,7 @@
 
                             </div>
                             <div class="card-body">
-                                <p class="card-text" th:value="${art.getContent()}">
+                                <p class="card-text" th:text="${art.getContent()}">
                                 </p>
                                 <a href="#" th:if="${photoList.get(index.index) != null}">
                                     <img class="card-img-top" th:src="@{/UploadFile/{filename}(filename = ${photoList.get(index.index).getFileName()})}" alt=""

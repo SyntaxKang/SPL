@@ -64,7 +64,8 @@ public class TimelineController {
     }
 
     @RequestMapping(value = "/timeline/insert", method = RequestMethod.POST)
-    public String timelineInsert(@RequestParam(value = "imageFile") MultipartFile image, @RequestParam(value = "message") String content){
+    public String timelineInsert(@RequestParam(value = "imageFile") MultipartFile image, @RequestParam(value = "message") String content
+    ,@RequestParam(value = "groupIdx")String groupIdx){
         System.out.println("Time Line Insert!!");
         System.out.println("Content : " + content);
 
@@ -96,6 +97,6 @@ public class TimelineController {
             }
         }
 
-        return "redirect:/timeline";
+        return "redirect:/timeline?groupIdx="+groupIdx;
     }
 }
