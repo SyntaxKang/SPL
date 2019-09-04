@@ -121,7 +121,7 @@
                     <a th:href="@{/walk(groupIdx = ${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">기록실</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                     <a href="#" class="text-white" style="margin-left: 40px">공지사항</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/Photo" class="text-white" style="margin-left: 40px">사진첩</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{/Photo(groupIdx=${groups.getGroupIdx()})}" class="text-white" style="margin-left: 40px">사진첩</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="#" class="text-white" style="margin-left: 40px;margin-right: 20px">일정</a>
                 </nav>
             </div>
