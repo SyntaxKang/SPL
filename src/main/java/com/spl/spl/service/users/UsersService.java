@@ -5,4 +5,6 @@ import org.springframework.stereotype.Service;
 
 public interface UsersService {
     public Users findByIdx(Integer idx);
+
+    Users findByEmail(String email);
 }

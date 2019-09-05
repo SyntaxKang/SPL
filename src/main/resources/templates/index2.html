@@ -48,9 +48,9 @@
                 <a th:href="@{/groupcreate}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="list : ${groupList}">
+        <div class="col-lg-4 col-sm-6 portfolio-item" th:each="group : ${groupList}">
             <div class="card h-100">
-                <a th:href="@{/timeline(groupIdx = ${list.getGroupIdx()})}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a th:href="@{/timeline(groupIdx = ${group.getGroupIdx()})}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             </div>
         </div>
     </div>

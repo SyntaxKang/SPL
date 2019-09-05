@@ -1,7 +1,7 @@
 package com.spl.spl.controller.groupcreate;
 
 import com.spl.spl.dto.group.Groups;
-import com.spl.spl.dto.user_group.Users_group;
+import com.spl.spl.dto.user_group.users_group;
 import com.spl.spl.dto.users.Users;
 import com.spl.spl.repository.group.GroupsRepository;
 import com.spl.spl.repository.user_group.UsersGroupRepository;
@@ -77,7 +77,7 @@ public class createcontroller {
         System.out.println("유저들어옴?" + userIdx);
         Users users = usersRepository.findByIdx(userIdx);
 
-        usersGroupRepository.save(Users_group.builder()
+        usersGroupRepository.save(users_group.builder()
                 .groups(newgroups)
                 .grade(2)
                 .users(users)

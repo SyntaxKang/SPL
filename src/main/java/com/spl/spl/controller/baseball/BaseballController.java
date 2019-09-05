@@ -87,7 +87,7 @@ public class BaseballController {
         for (int j = 0; j < list2.size(); j++) {
             Object[] obj = list2.get(j);
 
-            Users getUser = usersService.findByIdx((Integer) obj[1]);
+            Users getUser = usersService.findByIdx((Integer) obj[5]);
 
             uList.add(getUser);
         }

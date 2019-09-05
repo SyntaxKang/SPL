@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @NoArgsConstructor
 @Table(name = "users_group")
-public class Users_group {
+@Entity
+public class users_group {
 
     @Id
     @Column(name="users_group_idx")
@@ -37,7 +37,7 @@ public class Users_group {
     private String nick;
 
     @Builder
-    public Users_group(Users users,Groups groups,int grade,String nick){
+    public users_group(Users users, Groups groups, int grade, String nick){
         this.users = users;
         this.groups = groups;
         this.grade = grade;

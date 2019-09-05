@@ -71,12 +71,11 @@ public class Usercontroller {
         return "register";
     }
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(@ModelAttribute Users user, HttpServletRequest request, HttpServletResponse response,HttpSession session, Model model)throws Exception {
+    public String register(Users user, HttpServletRequest request, HttpServletResponse response,HttpSession session, Model model)throws Exception {
+        System.out.println("Register get Email : "+user.getEmail());
         PasswordEncoder pe = new BCryptPasswordEncoder();
-        Users searchuser = userRepository.findByEmail(user.getEmail());
-        System.out.println("SearchUser : "+searchuser.getEmail());
 
-        if (searchuser == null) {
+        if(usersService.findByEmail(user.getEmail()) == null){
             HashSet<UserAuthority> a = new HashSet<>();
             a.add(UserAuthority.USER);
             user.setAuthorities(a);
@@ -90,14 +89,13 @@ public class Usercontroller {
             out.println("<script>alert('회원가입을 축하드립니다.');</script>");
             out.flush();
             return "/index";
-        } else {
+        }else{
             //이미 회원가입이 되어있는지 확인
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('가입된 사용자입니다.');</script>");
             out.flush();
             return "register";
-
         }
     }
 
@@ -198,13 +196,17 @@ public class Usercontroller {
         Users users = (Users) session.getAttribute("local");
 
         System.out.println("Index2 UserIdx : "+users.getUsersIdx());
-
-        List<Object[]> list = usersGroupService.findByUserIdx(users.getUsersIdx());
         List<Groups> groupsList = new ArrayList<>();
 
-        for (Object[] obj: list) {
-            Groups groups = groupService.findByIdx((int)obj[2]);
-            groupsList.add(groups);
+        if(usersGroupService.findByUserIdx(users.getUsersIdx()) != null) {
+
+            List<Object[]> list = usersGroupService.findByUserIdx(users.getUsersIdx());
+
+
+            for (Object[] obj : list) {
+                Groups groups = groupService.findByIdx((int) obj[4]);
+                groupsList.add(groups);
+            }
         }
 
         model.addAttribute("groupList",groupsList);

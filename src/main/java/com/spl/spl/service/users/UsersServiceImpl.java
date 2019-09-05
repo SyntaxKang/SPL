@@ -56,4 +56,9 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
         return repository.findAll(pageable);
     }
+
+    @Override
+    public Users findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 }
