@@ -8,12 +8,14 @@ import com.spl.spl.repository.user_group.UsersGroupRepository;
 import com.spl.spl.repository.users.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,7 +31,13 @@ public class createcontroller {
 
     //<모임 생성 입력폼
     @GetMapping(value = "/groupcreate")
-    public String groupcreate() {
+    public String groupcreate(HttpSession session,Model model) {
+        Users user = (Users) session.getAttribute("local");
+
+        System.out.println(user.getUsersIdx());
+
+        model.addAttribute("userIdx",user.getUsersIdx());
+
         return "groupcreate";
     }
 
@@ -46,7 +54,7 @@ public class createcontroller {
         System.out.println(file.getOriginalFilename());
         System.out.println(file.getOriginalFilename().getClass());
 
-        String upload = "C:\\SpringBoot\\SPL\\src\\main\\resources\\static\\UploadFile";
+        String upload = "C:\\Users\\NaSangYeon\\IdeaProjects\\spl\\src\\main\\resources\\static\\UploadFile";
         //파일이있다면
         if (!file.getOriginalFilename().isEmpty()) {
 
@@ -73,7 +81,7 @@ public class createcontroller {
                 .groups(newgroups)
                 .grade(2)
                 .users(users)
-                .nick(users.getNick())
+                .nick(users.getNickname())
                 .build());
 
 
