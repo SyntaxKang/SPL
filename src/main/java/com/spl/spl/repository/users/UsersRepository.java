@@ -10,4 +10,9 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends JpaRepository<Users,Integer> {
     @Query(value = "select * from users where users_idx = :idx",nativeQuery = true)
     public Users findByIdx(@Param("idx") Integer idx);
+
+    @Query(value = "select * from users where email = :email",nativeQuery = true)
+    Users findByEmail(@Param("email") String email);
+
+    Users findByArea(String area);
 }

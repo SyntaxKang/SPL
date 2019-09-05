@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>내정보</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/modern_business.css}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="text-align: center;">
+
+    <div class="page-header">
+
+            <br/>
+            <h3><font color="green">내정보 확인</font></h3>
+        </div>
+    <div class="container-fluid" align="center">
+        <div class="col-md-5">
+                <hr>
+                <form action="/userview" method="post" >
+                    <div class="form-group" th:align="left">
+                    <i class="fas fa-envelope"></i>
+                    <label for="email" >이메일</label>
+                    <span type="email" name="email" id="email" class="form-control form-control-user" th:text="${user.getEmail()}"  readonly></span>
+                </div>
+
+
+                <div class="form-group" th:align="left">
+                    <i class="fas fa-user"></i>
+                    <label for="name"  >이름</label>
+                    <span class="form-control form-control-user" id="name" th:text="${user.getName()}"></span>
+
+                </div>
+                <div class="form-group" th:align="left">
+                    <i class="fas fa-user"></i>
+                    <label for="nickname" >닉네임</label>
+                    <span type="text" name="nickname" id="nickname" class="form-control form-control-user" th:text="${user.getNickname()}"></span>
+
+                </div>
+                <div class="form-group" th:align="left">
+                    <i class="fas fa-inbox"></i>
+                    <label for="category" >카테고리</label>
+                    <span type="text" name="category" id="category" class="form-control" th:text="${user.getCategory()}" ></span>
+                </div>
+                <div class="form-group" th:align="left">
+                    <i class="fas fa-address-book"></i>
+                    <label for="area" >지역</label>
+                    <span type="text" name="area" id="area" class="form-control" th:text="${user.getArea()}" ></span>
+                    <span type="text" name="areaa" id="areaa" class="form-control" th:text="${user.getAreaa()}"></span>
+                </div>
+
+                    <hr>
+
+
+                    <div class="btn-area">
+                        <input type="button" class="btn btn-success form-control" id="close" value="닫기">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script>
+    $("#close").click(function () {
+        location.href="/index2"
+    });
+
+</script>
+
+
+</body>
+</html>

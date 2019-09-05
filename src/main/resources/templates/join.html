@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>추가정보</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/modern_business.css}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="text-align: center;">
+
+    <div class="page-header">
+        <br/>
+        <h3><font color="green">Sign Up</font></h3>
+    </div>
+    <div class="container-fluid" align="center">
+        <div class="col-md-5">
+            <form action="/join" method="post" name="join" onsubmit="return join()">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                <div class="form-group" th:align="left">
+                    <hr>
+                    <!-- 로셜로그인 후 추가정보 입력-->
+
+                    <div class="form-group" th:align="left">
+                        <label for="email" >이메일</label>
+                        <i class="fas fa-lock"></i>
+                        <span type="email" name="email" id="email" class="form-control form-control-user" th:text="${local.getEmail()}" readonly></span>
+                    </div>
+                    <div class="form-group" th:align="left">
+                        <label for="password" >비밀번호</label>
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" id="password" class="form-control form-control-user" placeholder="숫자,영문으로 조합하여 6자 이상 20자 이하" required>
+
+                    </div>
+
+                <div class="form-group" th:align="left">
+                    <label for="nickname" >닉네임</label>
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="nickname" id="nickname" class="form-control form-control-user" placeholder="별명"  data-error="반드시 입력해주세요" required>
+
+                </div>
+                <div class="form-group" th:align="left">
+                    <label for="category" >카테고리</label>
+                    <select name="category" id="category" class="form-control" >
+                        <option value="선택" selected>선택</option>
+                        <option value="없음">없음</option>
+                        <option value="축구">축구</option>
+                        <option value="야구">야구</option>
+                        <option value="농구">농구</option>
+                        <option value="볼링">볼링</option>
+                        <option value="자전거">자전거</option>
+                        <option value="당구">당구</option>
+                    </select>
+                </div>
+                <div class="form-group" th:align="left">
+                    <label for="area" >지역</label>
+                    <select name="area" id="area" class="form-control" data-error="필수 선택사항입니다." required>
+                        <option value="" selected>선택</option>
+                        <option value="서울">서울</option>
+                        <option value="인천">인천</option>
+                        <option value="대전">대전</option>
+                        <option value="부산">부산</option>
+                        <option value="광주">광주</option>
+                        <option value="울산">울산</option>
+                        <option value="원주">원주</option>
+                        <option value="천안">천안</option>
+                        <option value="의정부">의정부</option>
+                        <option value="안산">안산</option>
+                        <option value="세종">세종</option>
+                        <option value="평택">평택</option>
+                        <option value="수원">수원</option>
+                        <option value="용인">용인</option>
+                        <option value="하남">하남</option>
+                        <option value="김포">김포</option>
+                        <option value="제주">제주</option>
+                        <option value="당진">당진</option>
+                        <option value="성남">성남</option>
+                        <option value="안양">안양</option>
+                        <option value="광명">광명</option>
+                        <option value="과천">과천</option>
+                        <option value="시흥">시흥</option>
+                        <option value="오산">오산</option>
+                        <option value="부천">부천</option>
+                        <option value="이천">이천</option>
+                        <option value="여주">여주</option>
+                        <option value="광주광역시">광주광역시</option>
+                        <option value="군산">군산</option>
+                        <option value="익산">익산</option>
+                        <option value="전주">전주</option>
+                     </select>
+                    </div>
+                    <input type="text" name="areaa" id="areaa" class="form-control" placeholder="예)종로구" required>
+
+                </div>
+
+                <hr>
+                <div class="btn-area">
+                    <button type="submit" class="btn btn-success form-control" value="확인"><span>확인</span></button></div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/join.js}"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>회원목록</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/modern_business.css}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="page-header">
+        <h1>회원목록</h1>
+    </div>
+    <div class="pull-right" style="width:100px;margin:10px 0;">
+        <a href="/admin" class="btn btn-primary btn-block">확인</a>
+    </div>
+    <br/><br/><br/>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-1">#</th>
+                <th class="col-md-2">ID</th>
+               <!-- <th class="col-md-2">Password</th>-->
+                <th class="col-md-3">Name</th>
+                <th class="col-md-2">NickName</th>
+                <th class="col-md-2">Category</th>
+                <th class="col-md-2">Area</th>
+                <th class="col-md-2">Areaa</th>
+                <th class="col-md-2">SocialID</th>
+                <th class="col-md-2">SocialType</th>
+                <th class="col-md-2">createDate</th>
+                <th class="col-md-2">updateDate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.idx}"></td>
+                <td th:text="${user.getEmail()}"></td>
+              <!--<td th:text="${user.getPassword()}"></td>-->
+                <td th:text="${user.getName()}"></td>
+                <td th:text="${user.getNickname()}"></td>
+                <td th:text="${user.getCategory()}"></td>
+                <td th:text="${user.getArea()}"></td>
+                <td th:text="${user.getAreaa()}"></td>
+                <td th:text="${user.getPincipal()}"></td>
+                <td th:text="${user.getSocialType()}"></td>
+                <td th:text="${user.createdDate} ? ${#temporals.format(user.createdDate,'yyyy-MM-dd HH:mm')} : ${user.createdDate}"></td>
+                <td th:text="${user.updatedDate} ? ${#temporals.format(user.updatedDate,'yyyy-MM-dd HH:mm')} : ${user.updatedDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <!-- Pagination -->
+   <!-- <nav aria-label="Page navigation" style="text-align:center;">
+        <ul class="pagination" th:with="startNumber=${T(Math).floor(userList.number/10)}*10+1, endNumber=(${userList.totalPages} > ${userList}+9) ? ${startNumber}+9 : ${userList.totalPages}">
+            <li><a aria-label="Previous" href="/userlist?page=1">&laquo;</a></li>
+            <li th:style="${userList.first} ? 'display:none'">
+                <a th:href="@{/userlist(page=${userList.number})}">&lsaquo;</a>
+            </li>
+
+            <li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${userList.number}+1) ? 'active'">
+                <a th:href="@{/userlist(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+            </li>
+
+            <li th:style="${userList.last} ? 'display:none'">
+                <a th:href="@{/userlist(page=${userList.number}+2)}">&rsaquo;</a>
+            </li>
+            <li><a aria-label="Next" th:href="@{/userlist(page=${userList.totalPages})}">&raquo;</a></li>
+        </ul>
+    </nav>-->
+    <!-- /Pagination -->
+</div>
+</div>
+
+
+<div th:replace="layout/footer::footer"></div>
+
+</body>
+</html>

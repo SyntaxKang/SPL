@@ -24,4 +24,9 @@ public class UsersGroupServiceImpl implements UsersGroupService{
     public List findByGroup(int groupIdx) {
         return repository.findByGroupIdx(groupIdx);
     }
+
+    @Override
+    public List findByUserIdx(Integer userIdx) {
+        return repository.findByUsersIdx(userIdx);
+    }
 }

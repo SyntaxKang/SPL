@@ -68,7 +68,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">모임 생성하기</h1>
                                 </div>
                                 <form class="form-control-user" id="createform" action="/group/create" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" value="1" name="userIdx">
+                                    <input type="hidden" th:value="${userIdx}" name="userIdx">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-sm" id="name"
                                                name="name" placeholder="모임 이름">

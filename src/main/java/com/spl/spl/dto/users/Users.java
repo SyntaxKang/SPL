@@ -1,73 +1,82 @@
 package com.spl.spl.dto.users;
 
+import com.spl.spl.dto.users.enums.SocialType;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Getter
+@Data
 @NoArgsConstructor
-public class Users {
+@Table(name = "users")
+public class Users implements Serializable {
 
     @Id
     @Column(name="users_idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usersIdx;
 
-    @Column(name = "email")
+
+    @Column
     private String email;
 
-    @Column(name = "pwd")
-    private String pwd;
-
-    @Column(name = "social_type")
-    private String socialType;
-
-    @Column(name = "birth_date")
-    private Date birthDate;
-
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "create_date")
-    private LocalDate createDate;
-
-    @Column(name = "account_status")
-    private Boolean accountStatus;
-
-    @Column(name = "religion")
-    private String religion;
-
-    @Column(name = "profile")
-    private String profile;
+    @Column
+    private String password;
 
     @Column
     private String name;
 
     @Column
-    private String nick;
+    private String nickname;
 
-    @Column(name = "find_key")
-    private String findKey;
+    @Column
+    private String category;
+
+    @Column
+    private String pincipal;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    @Column
+    private String area;
+
+    @Column
+    private String areaa;
+
+    @Column
+    private LocalDateTime createdDate;
+
+    @Column
+    private LocalDateTime updatedDate;
+
+
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<UserAuthority> authorities = new HashSet<>();
+
 
     @Builder
-    public Users(Integer usersIdx,String email,String pwd,String socialType,Date birthDate,String gender,String religion,String profile,String name,String nick,String findKey){
+    public Users(Integer usersIdx, String name, String password, String email, String pincipal, SocialType socialType, String nickname, String areaa, String area, String category, LocalDateTime createdDate, LocalDateTime updatedDate){
         this.usersIdx = usersIdx;
-        this.email = email;
-        this.pwd = pwd;
-        this.socialType = socialType;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.religion = religion;
-        this.profile = profile;
-        this.name = name;
-        this.nick = nick;
-        this.findKey = findKey;
-        this.createDate = LocalDate.now();
-        this.accountStatus = true;
+        this.name=name;
+        this.password=password;
+        this.email=email;
+        this.nickname=nickname;
+        this.area=area;
+        this.areaa=areaa;
+        this.socialType=socialType;
+        this.pincipal=pincipal;
+        this.category=category;
+        this.createdDate=createdDate;
+        this.updatedDate=updatedDate;
     }
 }

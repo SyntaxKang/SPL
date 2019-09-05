@@ -21,91 +21,96 @@
 <body>
 
 <header style="margin-top: 20px;">
-<div class="row">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 800px;margin-left: 120px">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>First Slide</h3>
-                    <p>This is a description for the first slide.</p>
+    <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 800px;margin-left: 120px">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>First Slide</h3>
+                        <p>This is a description for the first slide.</p>
+                    </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Second Slide</h3>
+                        <p>This is a description for the second slide.</p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Third Slide</h3>
+                        <p>This is a description for the third slide.</p>
+                    </div>
                 </div>
             </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Second Slide</h3>
-                    <p>This is a description for the second slide.</p>
-                </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Third Slide</h3>
-                    <p>This is a description for the third slide.</p>
-                </div>
-            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
 
-    <!--login-->
-    <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-            <h4 class="card-header">login</h4>
-            <div class="card-body">
-                <form class="user">
-                    <div class="form-groups">
-                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                    </div>
-                    <div class="form-groups">
-                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                    </div>
-                    <div class="form-groups">
-                        <div class="custom-control custom-checkbox small">
-                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+        <!--login-->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header" align="center">login</h4>
+                <div class="card-body">
+                    <form method="post" action="/loginCheck">
+                        <!--사이트 간 요청 위조 방지를 위해 form태그 내부에 _csrf속성이 존재 -->
+                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                        <div class="form-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="email" class="form-control form-control-user"  placeholder="이메일 형식으로 기입해주세요" required>
                         </div>
-                    </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                        Login
-                    </a>
+                        <div class="form-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" class="form-control form-control-user"  placeholder="비밀번호" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                <label class="custom-control-label" for="customCheck">로그인 저장</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="submit" class="btn btn-primary btn-user btn-block" value="로그인">
+                        </div>
+                    </form>
                     <hr>
-                    <a href="#" class="btn btn-google btn-user btn-block">
-                        <img th:src="@{/img/naverlogin.PNG}" width="281.73" height="52">
-                    </a>
-                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                        <img th:src="@{/img/구글로그인.PNG}" width="281.73" height="52">
-                    </a>
-                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                        <img th:src="@{/img/kakao.PNG}" width="281.73" height="52">
-                    </a>
-                </form>
-                <hr>
-                <div class="text-center">
-                    <a class="small" href="forgot-password.html">비밀번호를 잃어버림?</a>
-                </div>
-                <div class="text-center">
-                    <a class="small" href="register.html">회원가입!</a>
+                    <div class="container-fluid text-center">
+                        <a href="javascript:;" class="btn_social btn-user btn-block" data-social="naver">
+                            <img th:src="@{/img/naverlogin.PNG}" width="281.83" height="52">
+                        </a>
+                        <a href="javascript:;" class="btn_social btn-user btn-block"  data-social="google">
+                            <img th:src="@{/img/goo.PNG}" width="281.83" height="52" >
+                        </a>
+                        <a href="javascript:;" class="btn_social btn-user btn-block" data-social="kakao">
+                            <img th:src="@{/img/kakaoo.PNG}" width="281.83" height="52">
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <a class="small" href="forgot-password.html">비밀번호를 잃어버림?</a>
+                    </div>
+                    <div class="text-center">
+                        <a class="small" href="/register">회원가입!</a>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
-
-</div>
 </header>
 
 <!-- Page Content -->
@@ -199,8 +204,14 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script>
+    $('.btn_social').click(function () {
+        var socialType = $(this).data('social');
+        location.href="/oauth2/authorization/"+socialType;
+    });
+</script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 
