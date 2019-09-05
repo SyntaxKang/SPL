@@ -59,7 +59,6 @@
         var type = 'POST';
 
         $(document).ready(function () {
-
             //swal("load Success","Hello User","success");
 
             $("#submitBtn").click(function () {
@@ -83,9 +82,28 @@
                     }
                 });
             });
+
+            $("#cmtbtn").click(function () {
+                var data = {
+                    "comment": $("#comment").val(),
+                    "articleIdx": $("#articleIdx").val(),
+                    "groupIdx":$("#groupIdx").val()
+                };
+
+                $.ajax({
+                    url: '/comment/insert',
+                    type: 'POST',
+                    data: data,
+                    success: function (data) {
+                            $("#comment").val('');
+                    },
+                    complete: function (data) {
+                        location.reload();
+                    }
+                });
+            });
         });
     </script>
-
 </head>
 
 <body id="page-top">
@@ -216,6 +234,7 @@
                                             <div class="dropdown-menu dropdown-menu-right"
                                                  aria-labelledby="configuration">
                                                 <a class="dropdown-item" href="#">신고하기</a>
+                                                <a class="dropdown-item" href="#">삭제하기</a>
                                             </div>
                                         </div>
                                     </div>
@@ -237,22 +256,41 @@
                             <div class="card-body row">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="20px" src="https://picsum.photos/20/20"
+                                        <img class="rounded-circle" style="width: 50px"  src="https://picsum.photos/50/50"
                                              alt="">
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0">신택</div>
                                     </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="comment" rows="3"
-                                                  placeholder="댓글을 입력하세요!"></textarea>
+                                    <!--댓글-->
+                                    <div class="form-group" style="margin-top: 20px;margin-left: 20px">
+                                        <input type="hidden" name="articleIdx" th:value="${art.getArticleIdx()}">
+                                        <input type="hidden" name="groupIdx" th:value="${groups.getGroupIdx()}">
+                                        <input type="text" class="text-area" id="comment" name="comment" rows="3"
+                                               placeholder="댓글을 입력하세요!" style="height: 35px;width: 300px;float: left">
+                                        <button class="btn btn-primary" id="cmtbtn" name="cmtbtn" type="submit" style="margin-left: 10px;">입력</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!--댓글 목록-->
+                            <div class="card-body row" th:if="${commentList.get(index.index) != null}">
+                                <div class="d-flex justify-content-between align-items-center" style="margin-left: 40px">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" style="width: 50px"  src="https://picsum.photos/50/50" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0">신택</div>
+                                    </div>
+                                    <!--댓글List-->
+                                        <div class="my-3 p-3 bg-white rounded shadow-sm" style="margin-left: 20px;height: 35px" th:text="${commentList.get(index.index).getContent()}">
+                                        </div>
+
                                 </div>
                             </div>
                         </div>
                         <!-- Post /////-->
                     </div>
-
                     <!--오른쪽-->
                     <div class="col-md-3">
                         <div class="card gedf-card">
@@ -266,7 +304,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+                </div>   <!--row끝-->
             </div>
         </div>
     </div>

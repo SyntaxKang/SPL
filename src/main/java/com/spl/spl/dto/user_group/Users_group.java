@@ -16,7 +16,7 @@ public class Users_group {
 
     @Id
     @Column(name="users_group_idx")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usersGroupIdx;
 
     @ManyToOne
