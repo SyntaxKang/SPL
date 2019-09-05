@@ -54,8 +54,11 @@ public class Usercontroller {
 
     @RequestMapping(value = "/index")
     public String index(Users user, HttpServletRequest request, HttpSession session)
-
     {
+        if(session.getAttribute("local") != null){
+            return "redirect:/index2";
+        }
+
         session.setAttribute("local",user);
 
         return "index";
