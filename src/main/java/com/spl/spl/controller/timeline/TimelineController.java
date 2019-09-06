@@ -89,7 +89,7 @@ public class TimelineController {
         model.addAttribute("articleList",articleList);
         model.addAttribute("groups",groups);
         model.addAttribute("commentList",commentList);
-        model.addAttribute("sessionUser",sessionUser);
+        model.addAttribute("local",sessionUser);
         model.addAttribute("nameList",nameList);
 
         return "timeline";
