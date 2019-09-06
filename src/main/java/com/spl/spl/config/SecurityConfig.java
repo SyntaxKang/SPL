@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http
-                .authorizeRequests().antMatchers("/","/admin","/chat/**","/RecordRoom","/soccer/**","/login","/join","/index","/oauth2/**","/register").permitAll()
+                .authorizeRequests().antMatchers("/admin","/chat/**","/RecordRoom","/soccer/**","/login","/join","/index","/oauth2/**","/register").permitAll()
                 .antMatchers("/index2").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/chat/**").hasRole("USER")
@@ -59,14 +60,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .exceptionHandling()
-                //.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/index"))
                 .and()
                 .formLogin()
                 .loginPage("/index")
                 .loginProcessingUrl("/loginCheck")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/index2")
+                .defaultSuccessUrl("/customLogin")
                 .failureUrl("/loginFailure")
                 .and()
                 .logout()

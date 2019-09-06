@@ -210,24 +210,20 @@ public class Usercontroller {
         }
 
         model.addAttribute("groupList",groupsList);
-
-
-
         model.addAttribute("local",users);
 
 
         return "index2";
     }
 
-    /*@GetMapping("/toolbar")
-    public String tool(User user, HttpSession session,Model model)throws Exception{
-        User findUser = (User) session.getAttribute("local");
-
-        System.out.println("Tool bar Session Email : "+findUser.getEmail());
-
-        model.addAttribute("user",findUser);
-        return "toolbar";
-    }*/
+//    @RequestMapping("/toolbar")
+//    public String tool(HttpSession session,Model model)throws Exception{
+//        Users findUser = (Users) session.getAttribute("local");
+//
+//        model.addAttribute("user",findUser);
+//
+//        return "toolbar";
+//    }
 
     @GetMapping("/userview")
     public String userview(Users user, HttpSession session, Model model)throws Exception{
@@ -252,5 +248,31 @@ public class Usercontroller {
     @GetMapping("/admin")
     public String admin(){
         return "admin";
+    }
+
+    @RequestMapping("/customLogin")
+    public String customLogin(HttpSession session, Users user){
+        System.out.println("Custom Login : "+user.getEmail());
+        if(usersService.findByEmail(user.getEmail()) != null){
+            session.setAttribute("local",usersService.findByEmail(user.getEmail()));
+
+            return "/index2";
+        }else{
+
+            return "index";
+        }
+    }
+
+    @RequestMapping(value = "/loginCheck",method = RequestMethod.POST)
+    public String loginCheck(HttpSession session,Users user){
+        System.out.println("LoginCheck : "+user.getEmail());
+        if(usersService.findByEmail(user.getEmail()) != null){
+            session.setAttribute("local",usersService.findByEmail(user.getEmail()));
+
+            return "/index2";
+        }else{
+
+            return "index";
+        }
     }
 }

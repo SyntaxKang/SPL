@@ -220,8 +220,8 @@
                                                  alt="" style="height: 100px">
                                         </div>
                                         <div class="ml-2">
-                                            <div class="h5 m-0">신택</div>
-                                            <div class="fa fa-clock-o">2019-09-02 오전 11:39</div>
+                                            <div class="h5 m-0" th:text="${nameList.get(index.index)}"></div>
+                                            <div class="fa fa-clock-o" th:text="${art.getWrtieDate()}"></div>
                                         </div>
                                     </div>
                                     <div>
@@ -260,7 +260,7 @@
                                              alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0">신택</div>
+                                        <div class="h5 m-0" th:text="${sessionUser.getName()}"></div>
                                     </div>
                                     <!--댓글-->
                                     <div class="form-group" style="margin-top: 20px;margin-left: 20px">

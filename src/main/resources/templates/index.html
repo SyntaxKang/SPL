@@ -66,27 +66,27 @@
             <div class="card h-100">
                 <h4 class="card-header" align="center">login</h4>
                 <div class="card-body">
-                    <form method="post" action="/loginCheck">
-                        <!--사이트 간 요청 위조 방지를 위해 form태그 내부에 _csrf속성이 존재 -->
-                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-                        <div class="form-group">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" name="email" class="form-control form-control-user"  placeholder="이메일 형식으로 기입해주세요" required>
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" name="password" class="form-control form-control-user"  placeholder="비밀번호" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox small">
-                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                <label class="custom-control-label" for="customCheck">로그인 저장</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <input type="submit" class="btn btn-primary btn-user btn-block" value="로그인">
-                        </div>
-                    </form>
+<!--                    <form method="post" action="/customLogin">-->
+<!--                        &lt;!&ndash;사이트 간 요청 위조 방지를 위해 form태그 내부에 _csrf속성이 존재 &ndash;&gt;-->
+<!--                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">-->
+<!--                        <div class="form-group">-->
+<!--                            <i class="fas fa-envelope"></i>-->
+<!--                            <input type="email" name="email" class="form-control form-control-user"  placeholder="이메일 형식으로 기입해주세요" required/>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <i class="fas fa-lock"></i>-->
+<!--                            <input type="password" name="password" class="form-control form-control-user"  placeholder="비밀번호" required/>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="custom-control custom-checkbox small">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="customCheck">-->
+<!--                                <label class="custom-control-label" for="customCheck">로그인 저장</label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-xs-4">-->
+<!--                            <input type="submit" class="btn btn-primary btn-user btn-block" value="로그인">-->
+<!--                        </div>-->
+<!--                    </form>-->
                     <hr>
                     <div class="container-fluid text-center">
                         <a href="javascript:;" class="btn_social btn-user btn-block" data-social="naver">

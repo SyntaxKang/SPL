@@ -15,6 +15,7 @@ function join() {
         document.join.areaa.focus();
         return false;
     }
+
     return true;
 
 }
