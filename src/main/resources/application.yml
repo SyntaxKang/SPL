@@ -25,7 +25,7 @@ spring:
   security:
     oauth2:
       client:
-        preEstablishedRedirectUri: http://15.164.25.147:8080/callback
+        preEstablishedRedirectUri: https://15.164.25.147:8080/callback
         useCurrentUri: false
         registration:
           google:
