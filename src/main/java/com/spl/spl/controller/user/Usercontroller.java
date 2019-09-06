@@ -183,7 +183,7 @@ public class Usercontroller {
 
     @GetMapping("/loginFailure")
     public String loginfail(HttpServletRequest request) throws Exception{
-        return "/index";
+        return "index";
     }
     @GetMapping("/logout")
     public String logout(HttpSession session){
@@ -256,7 +256,7 @@ public class Usercontroller {
         if(usersService.findByEmail(user.getEmail()) != null){
             session.setAttribute("local",usersService.findByEmail(user.getEmail()));
 
-            return "/index2";
+            return "index2";
         }else{
 
             return "index";
@@ -269,7 +269,7 @@ public class Usercontroller {
         if(usersService.findByEmail(user.getEmail()) != null){
             session.setAttribute("local",usersService.findByEmail(user.getEmail()));
 
-            return "/index2";
+            return "index2";
         }else{
 
             return "index";
