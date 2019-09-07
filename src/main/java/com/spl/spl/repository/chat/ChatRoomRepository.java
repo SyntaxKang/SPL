@@ -4,6 +4,7 @@ import com.spl.spl.dto.chat.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@EnableRedisRepositories
 public class ChatRoomRepository {
     // Redis CacheKeys
     private static final String CHAT_ROOMS = "CHAT_ROOM"; // 채팅룸 저장
