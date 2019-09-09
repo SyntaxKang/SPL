@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://bootdb.ceu5zdoygxl3.ap-northeast-2.rds.amazonaws.com:3306/BootDB?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
    # url: jdbc:mysql://127.0.0.1:3306/testdb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: javauser
-    password: 1234
+    password: 12341234
 
   jpa:
     show-sql: true
