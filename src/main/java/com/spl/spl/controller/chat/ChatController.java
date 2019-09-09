@@ -27,14 +27,21 @@ public class ChatController {
     @MessageMapping("/chat/message")
     public void message(ChatMessage message, @Header("token") String token) {
         String nickname = jwtTokenProvider.getUserNameFromJwt(token);
+
+        System.out.println("nickname : "+nickname);
+        System.out.println("nickname.length() : "+nickname.length());
+
+        String cutName = nickname.substring(87,90);
+        System.out.println("CutName in message controller : "+cutName);
+
         // 로그인 회원 정보로 대화명 설정
-        nickname = userRepository.findByEmail(nickname).getNickname();
-        message.setSender(nickname);
+      //  nickname = userRepository.findByEmail(nickname).getNickname();
+        message.setSender(cutName);
 
         // 채팅방 입장시에는 대화명과 메시지를 자동으로 세팅한다.
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
             message.setSender("[알림]");
-            message.setMessage(nickname + "님이 입장하셨습니다.");
+            message.setMessage(cutName + "님이 입장하셨습니다.");
         }
 
         // 채팅방 인원수 세팅

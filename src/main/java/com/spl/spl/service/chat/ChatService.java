@@ -31,11 +31,19 @@ public class ChatService {
      */
     public void sendChatMessage(ChatMessage chatMessage) {
         chatMessage.setUserCount(chatRoomRepository.getUserCount(chatMessage.getRoomId()));
+
+        String cutName = chatMessage.getSender();
+        System.out.println("In chatservice cutName.length() : "+cutName.length());
+
+        if(cutName.length() > 80){
+            cutName = cutName.substring(87,90);
+        }
+
         if (ChatMessage.MessageType.ENTER.equals(chatMessage.getType())) {
-            chatMessage.setMessage(chatMessage.getSender() + "님이 방에 입장했습니다.");
+            chatMessage.setMessage(cutName+ "님이 방에 입장했습니다.");
             chatMessage.setSender("[알림]");
         } else if (ChatMessage.MessageType.QUIT.equals(chatMessage.getType())) {
-            chatMessage.setMessage(chatMessage.getSender() + "님이 방에서 나갔습니다.");
+            chatMessage.setMessage(cutName + "님이 방에서 나갔습니다.");
             chatMessage.setSender("[알림]");
         }
         redisTemplate.convertAndSend(channelTopic.getTopic(), chatMessage);

@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/admin","/chat/**","/RecordRoom","/soccer/**","/login","/join","/index","/oauth2/**","/register").permitAll()
                 .antMatchers("/index2").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/chat/**").hasRole("USER")
+                .antMatchers("/chat/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
